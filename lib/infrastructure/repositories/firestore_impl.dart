@@ -6,7 +6,33 @@ class FirestoreImpl implements IFirestoreFacade{
   final CollectionReference productsCollection = Firestore.instance.
       collection('products');
   @override
-  Future<Product> getProducts(List<String> orders, [int limit = 5]) {
+  Future<Product> getProducts(List<String> orders, [ Map<String, String> catagory, int limit = 5]) {
+    switch (orders.length -1) {
+      case 0: { 
+          // statements; 
+      } 
+      break; 
+      
+      case 1: { 
+          //statements; 
+      } 
+      break; 
+          
+      case 2: { 
+          //statements;  
+      }
+      break;
+
+      case 3: { 
+          //statements;  
+      }
+      break; 
+
+      default: { 
+          //statements;  
+      }
+      break; 
+    }
     return null;
   }
 
