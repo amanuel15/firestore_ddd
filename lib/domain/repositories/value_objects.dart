@@ -6,7 +6,7 @@ class Product {
   final String hypeDescription;
   final int soldAmount;
   final int totalAmount;
-  final List route;
+  final Map route;
   final List storageIds;
 
   Product({
