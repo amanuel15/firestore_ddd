@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:injectable/injectable.dart';
 import 'package:notes_firebase_ddd_course/domain/repositories/i_firestore_facade.dart';
 import 'package:notes_firebase_ddd_course/domain/repositories/value_objects.dart';
 
@@ -51,21 +52,29 @@ class FirestoreImpl implements IFirestoreFacade{
       break; 
           
       case 3: { 
-          //statements;  
+        if(catagory == null) {
+          return productsCollection.orderBy(orders[0], orders[1], orders[2]).limit(limitNo).getDocuments()
+            .then((snapshot) => _productListFromSnapshot(snapshot));
+        } else {
+          final String value = catagory.values.elementAt(0);
+          final String key = catagory.keys.elementAt(0);
+          return productsCollection.where(key, "==", value).orderBy(orders[0], orders[1], orders[2]).limit(limitNo)
+            .getDocuments().then((snapshot)=> _productListFromSnapshot(snapshot));
+        } 
       }
       break;
 
-      case 4: { 
-          //statements;  
-      }
-      break; 
+      // case 4: { 
+      //     //statements;  
+      // }
+      // break; 
 
       default: { 
-          //statements;  
+          return productsCollection.limit(5).getDocuments()
+            .then((snapshot) => _productListFromSnapshot(snapshot));
       }
       break; 
     }
-    return null;
   }
 
 }
